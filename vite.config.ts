@@ -1,40 +1,41 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig({
-  plugins: [
-    react(),
-    runtimeErrorOverlay(),
-    ...(process.env.NODE_ENV !== "production" &&
-    process.env.REPL_ID !== undefined
-      ? [
-          await import("@replit/vite-plugin-cartographer").then((m) =>
-            m.cartographer(),
-          ),
-          await import("@replit/vite-plugin-dev-banner").then((m) =>
-            m.devBanner(),
-          ),
-        ]
-      : []),
-  ],
+  plugins: [react()],
+  
+  // Definir pasta client como raiz
+  root: "client",
+  
   resolve: {
     alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+      "@": path.resolve(__dirname, "client/src"),
+      "@shared": path.resolve(__dirname, "shared"),
+      "@components": path.resolve(__dirname, "client/src/components"),
+      "@pages": path.resolve(__dirname, "client/src/pages"),
+      "@services": path.resolve(__dirname, "client/src/services"),
+      "@mocks": path.resolve(__dirname, "client/src/mocks"),
+      "@lib": path.resolve(__dirname, "client/src/lib"),
+      "@hooks": path.resolve(__dirname, "client/src/hooks"),
     },
   },
-  root: path.resolve(import.meta.dirname, "client"),
-  build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true,
-  },
+  
   server: {
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
-    },
+    port: 3000,
+    host: true,
+    open: true,
+  },
+  
+  build: {
+    // Output para pasta dist na raiz
+    outDir: "../dist",
+    emptyOutDir: true,
+    sourcemap: false,
+  },
+  
+  preview: {
+    port: 4173,
+    host: true,
   },
 });
