@@ -1,0 +1,101 @@
+Quero que você atue como um desenvolvedor full-stack e me ajude a estruturar um aplicativo mobile multiplataforma (Android e iOS) usando Capacitor, que empacota uma SPA feita em React com Vite.
+
+Contexto técnico
+
+O backend é PHP/CodeIgniter 4 + MySQL, que expõe endpoints REST em JSON.
+
+Para este exercício, não é necessário se conectar ao MySQL real; use placeholders de endpoints e mock data consistente com a estrutura do banco, para que o app seja totalmente testável offline.
+
+O projeto deve ser totalmente compatível com Windows:
+
+Todos os scripts do package.json devem funcionar no cmd ou PowerShell.
+
+Use cross-env para definir variáveis de ambiente.
+
+Evite comandos Linux-only (rm -rf, && em shell scripts).
+
+Estrutura de tabelas MySQL simuladas
+
+users → id, cpf, email, senha_hash, nome
+
+specialties → id, nome
+
+units → id, nome, specialty_id
+
+schedules → id, unit_id, specialty_id, hora
+
+appointments → id, user_id, unit_id, specialty_id, schedule_id, status
+
+Funcionalidades principais
+
+Login (CPF/Email + senha)
+
+Endpoint fictício: POST /api/login
+
+Retorna { "token": "...", "user": {...} }
+
+Se não houver backend, simule com mock data (ex.: email: teste@teste.com, senha: 123456).
+
+Salvar token em localStorage e usar para autenticação das próximas requisições.
+
+Agendamento de Consultas (fluxo progressivo)
+
+GET /api/specialties → retorna lista de especialidades
+
+GET /api/units?specialty={id} → retorna unidades que oferecem a especialidade
+
+GET /api/schedules?unit={id}&specialty={id} → retorna horários disponíveis
+
+POST /api/appointments → confirma agendamento
+
+Mock data deve refletir a estrutura MySQL acima, permitindo testar todo o fluxo offline
+
+Push Notifications
+
+Mostrar como configurar o Capacitor Push Notifications API
+
+Usar placeholders para chaves/configurações do serviço (ex.: Firebase Cloud Messaging)
+
+Criar exemplo de notificação fictícia (“Sua consulta foi confirmada para amanhã às 10h”)
+
+Design e Layout
+
+Interface limpa, responsiva e simples para mobile
+
+Paleta de cores via CSS variables:
+
+--primary-dark: #006571;
+--primary-medium: #019589;
+--primary-light: #01a89e;
+
+Entrega esperada
+
+Estrutura inicial de pastas/projeto React + Vite, organizada para SPA leve:
+
+src/components → componentes React reutilizáveis
+
+src/pages → telas (Login, Agendamento, etc.)
+
+src/services → funções de fetch para endpoints (placeholders)
+
+src/mocks → mock data em arquivos JSON ou JS, refletindo a estrutura MySQL
+
+Código exemplo em React para:
+
+Tela de Login com mock login
+
+Tela de Agendamento com fluxo especialidade → unidade → horário → confirmação
+
+Trecho de configuração para Push Notifications com Capacitor (placeholders)
+
+Scripts do package.json compatíveis com Windows usando cross-env
+
+Breve explicação de boas práticas: armazenar token, validação de inputs, modularização do código
+
+Resultado esperado
+
+O projeto deve rodar com npm install e npm run dev no Windows
+
+Deve ser possível navegar entre telas, testar login e agendamento usando mock data, antes de conectar ao backend real
+
+Mock data deve ser consistente com a estrutura de tabelas MySQL fornecida
