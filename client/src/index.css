@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Healthcare color palette */
+  --background: hsl(210 40% 98%);
+  --foreground: hsl(222.2 84% 4.9%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(222.2 84% 4.9%);
+  
+  --primary: hsl(188 100% 22%); /* #006571 */
+  --primary-foreground: hsl(0 0% 100%);
+  --primary-dark: hsl(188 100% 22%); /* #006571 */
+  --primary-medium: hsl(172 98% 32%); /* #019589 */
+  --primary-light: hsl(177 99% 33%); /* #01a89e */
+  
+  --secondary: hsl(210 40% 96%);
+  --secondary-foreground: hsl(222.2 84% 4.9%);
+  
+  --muted: hsl(210 40% 96%);
+  --muted-foreground: hsl(215.4 16.3% 46.9%);
+  
+  --accent: hsl(210 40% 96%);
+  --accent-foreground: hsl(222.2 84% 4.9%);
+  
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(0 0% 100%);
+  
+  --success: hsl(142.1 76.2% 36.3%);
+  --success-foreground: hsl(0 0% 100%);
+  
+  --border: hsl(214.3 31.8% 91.4%);
+  --input: hsl(214.3 31.8% 91.4%);
+  --ring: hsl(188 100% 22%);
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: hsl(222.2 84% 4.9%);
+  --foreground: hsl(210 40% 98%);
+  --card: hsl(222.2 84% 4.9%);
+  --card-foreground: hsl(210 40% 98%);
+  --primary-dark: hsl(188 100% 28%);
+  --primary-medium: hsl(172 98% 38%);
+  --primary-light: hsl(177 99% 40%);
+  --secondary: hsl(217.2 32.6% 17.5%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --muted: hsl(217.2 32.6% 17.5%);
+  --muted-foreground: hsl(215 20.2% 65.1%);
+  --accent: hsl(217.2 32.6% 17.5%);
+  --accent-foreground: hsl(210 40% 98%);
+  --border: hsl(217.2 32.6% 17.5%);
+  --input: hsl(217.2 32.6% 17.5%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: "Inter", system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .mobile-container {
+    @apply max-w-md mx-auto bg-card min-h-screen relative overflow-hidden;
+  }
+
+  .floating-label {
+    @apply relative;
+  }
+
+  .floating-label input:focus + label,
+  .floating-label input:not(:placeholder-shown) + label {
+    @apply transform -translate-y-6 scale-75 text-primary-medium;
+  }
+
+  .floating-label label {
+    @apply absolute left-3 top-3 transition-all duration-200 pointer-events-none text-muted-foreground;
+  }
+
+  .step-indicator {
+    @apply w-8 h-8 rounded-full border-2 border-primary-light flex items-center justify-center text-xs font-medium text-primary-light;
+  }
+
+  .step-indicator.active {
+    @apply bg-primary-medium text-white border-primary-medium;
+  }
+
+  .step-indicator.completed {
+    @apply bg-success text-success-foreground border-success;
+  }
+
+  .appointment-card {
+    @apply transition-shadow duration-200;
+  }
+
+  .appointment-card:hover {
+    @apply shadow-lg;
+  }
+
+  .schedule-slot {
+    @apply bg-card border border-border rounded-lg p-3 text-center hover:border-primary-medium hover:bg-accent transition-colors cursor-pointer;
+  }
+
+  .schedule-slot.selected {
+    @apply border-primary-medium bg-primary-light bg-opacity-20;
+  }
+
+  .schedule-slot:disabled {
+    @apply bg-muted cursor-not-allowed opacity-60;
+  }
+}
