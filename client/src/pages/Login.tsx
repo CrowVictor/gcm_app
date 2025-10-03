@@ -20,8 +20,8 @@ export default function Login({ onLoginSuccess }: LoginProps) {
   const form = useForm<LoginData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      emailOrCpf: "teste@teste.com",
-      password: "123456",
+      emailOrCpf: "",
+      password: "",
     },
   });
 
@@ -37,7 +37,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
     } catch (error) {
       toast({
         title: "Erro no login",
-        description: "Credenciais inválidas. Use: teste@teste.com / 123456",
+        description: "Email/CPF ou senha inválidos", 
         variant: "destructive",
       });
     } finally {
@@ -118,10 +118,6 @@ export default function Login({ onLoginSuccess }: LoginProps) {
         </a>
       </div>
 
-      <div className="mt-8 text-center text-xs text-muted-foreground">
-        <p>Dados de teste:</p>
-        <p>Email: teste@teste.com | Senha: 123456</p>
-      </div>
     </div>
   );
 }

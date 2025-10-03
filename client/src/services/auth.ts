@@ -13,10 +13,10 @@ class AuthService {
 
   async login(data: LoginData): Promise<AuthUser> {
     const response = await authApi.login(data);
-    
+
     localStorage.setItem("auth_token", response.token);
     localStorage.setItem("user_data", JSON.stringify(response.user));
-    
+
     this.currentUser = response.user;
     return response.user;
   }
@@ -33,9 +33,15 @@ class AuthService {
     }
 
     const userData = localStorage.getItem("user_data");
-    if (userData) {
-      this.currentUser = JSON.parse(userData);
-      return this.currentUser;
+    if (userData && userData !== "undefined") {  // ✅ Verifica se não é "undefined"
+      try {
+        this.currentUser = JSON.parse(userData);
+        return this.currentUser;
+      } catch (error) {
+        console.error('Erro ao fazer parse do user_data:', error);
+        localStorage.removeItem("user_data");  // Remove dado corrompido
+        return null;
+      }
     }
 
     return null;

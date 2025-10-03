@@ -1,13 +1,13 @@
 import { apiRequest } from "@/lib/queryClient";
-import type { 
-  LoginData, 
-  User, 
-  Specialty, 
-  UnitWithSpecialty, 
-  Schedule, 
-  InsertAppointment, 
+import type {
+  LoginData,
+  User,
+  Specialty,
+  UnitWithSpecialty,
+  Schedule,
+  InsertAppointment,
   Appointment,
-  AppointmentWithDetails 
+  AppointmentWithDetails
 } from "@shared/schema";
 
 export interface LoginResponse {
@@ -17,8 +17,25 @@ export interface LoginResponse {
 
 export const authApi = {
   login: async (data: LoginData): Promise<LoginResponse> => {
-    const response = await apiRequest("POST", "/api/login", data);
-    return response.json();
+    // Converte emailOrCpf para credential
+    const payload = {
+      credential: data.emailOrCpf,
+      password: data.password
+    };
+
+    const response = await apiRequest("POST", "/api/login", payload);
+    const jsonData = await response.json();
+
+    // ✅ Verifica se o backend retornou erro
+    if (!response.ok || jsonData.status !== 200) {
+      throw new Error(jsonData.message || 'Erro ao fazer login');
+    }
+
+    // ✅ Retorna apenas se for sucesso
+    return {
+      token: jsonData.token,
+      user: jsonData.user
+    };
   },
 };
 
@@ -48,11 +65,11 @@ export const appointmentApi = {
       },
       body: JSON.stringify(data),
     });
-    
+
     if (!response.ok) {
       throw new Error(`${response.status}: ${response.statusText}`);
     }
-    
+
     return response.json();
   },
 
@@ -63,11 +80,11 @@ export const appointmentApi = {
         "Authorization": `Bearer ${token}`,
       },
     });
-    
+
     if (!response.ok) {
       throw new Error(`${response.status}: ${response.statusText}`);
     }
-    
+
     return response.json();
   },
 };
