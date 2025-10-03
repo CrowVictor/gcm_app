@@ -173,7 +173,7 @@ export default function Dashboard({ onNewAppointment }: DashboardProps) {
                 <Bell className="text-xs text-primary-foreground" size={12} />
               </div>
               <div className="flex-1">
-                <p className="text-sm font-medium">Bem-vindo ao HealthApp</p>
+                <p className="text-sm font-medium">Bem-vindo ao MeuApp</p>
                 <p className="text-xs text-muted-foreground">Agende sua primeira consulta</p>
               </div>
             </div>

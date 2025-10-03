@@ -31,7 +31,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
       await authService.login(data);
       toast({
         title: "Login realizado com sucesso",
-        description: "Bem-vindo ao HealthApp!",
+        description: "Bem-vindo ao MeuApp!",
       });
       onLoginSuccess();
     } catch (error) {
@@ -51,7 +51,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
         <div className="w-20 h-20 bg-primary-medium rounded-full flex items-center justify-center mx-auto mb-4">
           <Stethoscope className="text-2xl text-white" size={32} />
         </div>
-        <h1 className="text-2xl font-bold text-foreground mb-2">HealthApp</h1>
+        <h1 className="text-2xl font-bold text-foreground mb-2">MeuApp</h1>
         <p className="text-muted-foreground">Agendamento médico simplificado</p>
       </div>
 

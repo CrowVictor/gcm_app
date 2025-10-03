@@ -351,7 +351,7 @@ export default function AppointmentFlow({ onClose, onSuccess }: AppointmentFlowP
       </Button>
 
       <p className="text-xs text-muted-foreground text-center mt-4">
-        Você receberá uma confirmação por email e SMS
+        Você receberá uma confirmação por WhatsApp
       </p>
     </div>
   );

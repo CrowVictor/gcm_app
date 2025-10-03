@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.healthapp.mobile',
-  appName: 'HealthApp',
+  appName: 'MeuApp',
   webDir: 'dist/public',
   server: {
     androidScheme: 'https'
@@ -27,7 +27,7 @@ const config: CapacitorConfig = {
     }
   },
   ios: {
-    scheme: "HealthApp"
+    scheme: "MeuApp"
   }
 };
 
